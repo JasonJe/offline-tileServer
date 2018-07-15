@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tile Server</title>
+        <meta charset="utf-8">
+        <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.bootcss.com/leaflet/1.3.1/leaflet.css" rel="stylesheet">
+        <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdn.bootcss.com/leaflet/1.3.1/leaflet.js"></script>
+        <style TYPE="text/css">
+            body {
+                margin: 0px;
+                padding: 0px;
+            }
+
+            html,
+            body,
+            #mapDiv {
+                height: 100%;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="mapDiv">
+        </div>
+        <script>
+            var url = '/tile?x={x}&y={y}&z={z}';
+            // var url = 'http://wprd03.is.autonavi.com/appmaptile?style=7&x={x}&y={y}&z={z}'
+
+            var latlng = new L.latLng(23.461, 111.921);
+            var map = new L.map('mapDiv', {
+                center: latlng,
+                zoom:  4,
+                detectRetina: true
+            });
+
+            L.tileLayer(url).addTo(map);
+        </script>
+    </body>
+</html>
