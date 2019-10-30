@@ -35,7 +35,6 @@ tile = Tile.for_latitude_longitude(latitude = lat, longitude = lon, zoom = zoom)
 print('mintile', 'X:', tile.tms_x, 'Y:', tile.tms_y, 'zoom:', tile.zoom)
 ```
 
-
 ### 1.3 多进程/多线程/异步爬取瓦片地图
 
 * 高德瓦片地图链接：http://wprd03.is.autonavi.com/appmaptile?style=7&x={x}&y={y}&z={z}
@@ -52,9 +51,15 @@ print('mintile', 'X:', tile.tms_x, 'Y:', tile.tms_y, 'zoom:', tile.zoom)
 
 * 异步：14.01809s
 
+### 2.3 基于`GeoPandas`生成地图瓦片
+
+范例程序是[`map_generate.py`](./map_generate.py)
+
+有时候需要定制一些瓦片地图，爬取的地图并不适用，这时候就可以使用`geojson, shpfile`等`GIS`文件进行地图绘制，生成瓦片地图。
+
+上述脚本的实现思路是: 1) 基于`GIS`文件和`GeoPandas`生成地图图片，根据具体的等级确定图片大小；2) 对生成的图片进行切图，即根据当前等级存在的瓦片数量和瓦片坐标，切割得到`256 * 256`的瓦片。
 
 ## 2. Flask + Leaflet 瓦片地图
-
 
 ### 2.1 瓦片地图路由定义
 
@@ -89,3 +94,4 @@ var map = new L.map('mapDiv', {
 
 L.tileLayer(url).addTo(map);
 ```
+
